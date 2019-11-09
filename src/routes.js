@@ -25,6 +25,7 @@ routes.use(authMiddleware);
 /**
  * Rotas para os Planos
  */
+routes.get('/students', StudentController.index);
 routes.get('/plans', PlanController.index);
 routes.post('/plans', PlanController.store);
 routes.put('/plans/:id', PlanController.update);

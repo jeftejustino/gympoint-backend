@@ -13,12 +13,12 @@ class RegistrationController {
       offset: (req.query.limit - 1) * 20,
       limit: 20,
       order: ['created_at'],
-      attributes: ['start_date', 'end_date', 'price'],
+      attributes: ['start_date', 'end_date', 'price', 'active'],
       include: [
         {
           model: Student,
           as: 'student',
-          attributes: ['id', 'nome', 'email'],
+          attributes: ['id', 'name', 'email'],
         },
         {
           model: Plan,
@@ -76,7 +76,7 @@ class RegistrationController {
         {
           model: Student,
           as: 'student',
-          attributes: ['id', 'nome', 'email'],
+          attributes: ['id', 'name', 'email'],
         },
         {
           model: Plan,
