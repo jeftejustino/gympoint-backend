@@ -5,13 +5,13 @@ import Student from '../models/Student';
 class StudentController {
   async store(req, res) {
     const Schema = Yup.object().shape({
-      nome: Yup.string().required(),
+      name: Yup.string().required(),
       email: Yup.string()
         .email()
         .required(),
-      idade: Yup.number().required(),
-      peso: Yup.string().required(),
-      altura: Yup.string().required(),
+      age: Yup.number().required(),
+      weight: Yup.string().required(),
+      height: Yup.string().required(),
     });
 
     if (!(await Schema.isValid(req.body))) {
@@ -26,15 +26,15 @@ class StudentController {
       return res.status(400).json({ error: 'Student already exists' });
     }
 
-    const { id, nome, idade, peso, altura } = await Student.create(req.body);
+    const { id, name, age, weight, height } = await Student.create(req.body);
 
     return res.json({
       id,
-      nome,
+      name,
       email,
-      idade,
-      peso,
-      altura,
+      age,
+      weight,
+      height,
     });
   }
 }
