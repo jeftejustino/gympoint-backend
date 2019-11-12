@@ -3,8 +3,9 @@ import Plan from '../models/Plan';
 
 class PlanController {
   async index(req, res) {
+    const { page = 1 } = req.query;
     const plan = await Plan.findAll({
-      offset: (req.query.limit - 1) * 20,
+      offset: (page - 1) * 20,
       limit: 20,
       order: ['created_at'],
     });

@@ -1,11 +1,12 @@
 import express from 'express';
+import cors from 'cors';
 import routes from './routes';
-
 import './database';
 
 class App {
   constructor() {
     this.server = express();
+    this.server.use(cors()); /* { origin: 'https://sitedaapi.com.br'} */
     this.middlewares();
     this.routes();
   }

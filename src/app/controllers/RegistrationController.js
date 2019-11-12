@@ -9,8 +9,9 @@ import Queue from '../../lib/Queue';
 
 class RegistrationController {
   async index(req, res) {
+    const { page = 1 } = req.query;
     const registration = await Registration.findAll({
-      offset: (req.query.limit - 1) * 20,
+      offset: (page - 1) * 20,
       limit: 20,
       order: ['created_at'],
       attributes: ['start_date', 'end_date', 'price', 'active'],
