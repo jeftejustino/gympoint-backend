@@ -12,7 +12,6 @@ import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 
-routes.post('/student', StudentController.store);
 routes.get('/students/:id/checkin', CheckinController.index);
 routes.post('/students/:id/checkin', CheckinController.store);
 routes.get('/students/:id/help-orders', HelpOrderStudentController.index);
@@ -23,11 +22,16 @@ routes.post('/session', SessionController.store);
 routes.use(authMiddleware);
 
 /**
+ * Rotas para os Estudantes
+ */
+routes.post('/student', StudentController.store);
+routes.put('/student/:id', StudentController.update);
+routes.get('/students', StudentController.index);
+routes.delete('/students/:id', StudentController.delete);
+
+/**
  * Rotas para os Planos
  */
-routes.get('/students', StudentController.index);
-routes.put('/students/:id', StudentController.update);
-routes.delete('/students/:id', StudentController.delete);
 routes.get('/plans', PlanController.index);
 routes.post('/plans', PlanController.store);
 routes.put('/plans/:id', PlanController.update);
