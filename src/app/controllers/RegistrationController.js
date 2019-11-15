@@ -14,7 +14,7 @@ class RegistrationController {
       offset: (page - 1) * 20,
       limit: 20,
       order: ['created_at'],
-      attributes: ['start_date', 'end_date', 'price', 'active'],
+      attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
       include: [
         {
           model: Student,
@@ -24,7 +24,7 @@ class RegistrationController {
         {
           model: Plan,
           as: 'plan',
-          attributes: ['title', 'duration', 'price'],
+          attributes: ['id', 'title', 'duration', 'price'],
         },
       ],
     });
