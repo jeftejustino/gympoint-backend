@@ -72,7 +72,7 @@ class RegistrationController {
     });
 
     const registration = await Registration.findByPk(regist.id, {
-      attributes: ['start_date', 'end_date', 'price'],
+      attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
       include: [
         {
           model: Student,
@@ -82,7 +82,7 @@ class RegistrationController {
         {
           model: Plan,
           as: 'plan',
-          attributes: ['title', 'duration', 'price'],
+          attributes: ['id', 'title', 'duration', 'price'],
         },
       ],
     });
@@ -105,7 +105,21 @@ class RegistrationController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const registration = await Registration.findByPk(req.params.id);
+    const registration = await Registration.findByPk(req.params.id, {
+      attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
+      include: [
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['id', 'name', 'email'],
+        },
+        {
+          model: Plan,
+          as: 'plan',
+          attributes: ['id', 'title', 'duration', 'price'],
+        },
+      ],
+    });
 
     if (!registration) {
       return res.status(400).json({ error: 'Registration not exists' });
