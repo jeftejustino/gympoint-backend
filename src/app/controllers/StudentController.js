@@ -73,9 +73,10 @@ class StudentController {
     if (!student) {
       return res.status(400).json({ error: 'Student not exists' });
     }
-    const { name, age, weight, height } = req.body;
+    const { name, age, email, weight, height } = req.body;
 
     student.name = name;
+    student.mail = email;
     student.age = age;
     student.weight = weight;
     student.height = height;
