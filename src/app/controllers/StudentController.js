@@ -76,11 +76,23 @@ class StudentController {
     const { name, age, email, weight, height } = req.body;
 
     student.name = name;
-    student.mail = email;
+    student.email = email;
     student.age = age;
     student.weight = weight;
     student.height = height;
     student.save();
+
+    return res.json(student);
+  }
+
+  async unique(req, res) {
+    const student = await Student.findByPk(req.params.id, {
+      attributes: ['id', 'name', 'email', 'age', 'weight', 'height'],
+    });
+
+    if (!student) {
+      return res.status(400).json({ error: 'Student not exists' });
+    }
 
     return res.json(student);
   }
