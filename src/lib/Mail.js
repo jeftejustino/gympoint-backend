@@ -25,6 +25,9 @@ class Mail {
       'compile',
       nodemailerhbs({
         viewEngine: exphbs.create({
+          helpers: {
+            logo: `${process.env.APP_URL}/files/images/logo.svg`,
+          },
           layoutsDir: resolve(viewPath, 'layouts'),
           partialsDir: resolve(viewPath, 'partials'),
           defaultLayout: 'default',

@@ -17,7 +17,7 @@ class HelpOrderController {
       where: { student_id },
       offset: (page - 1) * 20,
       limit: 20,
-      order: ['created_at'],
+      order: [['updatedAt', 'DESC']],
       include: [
         {
           model: Student,

@@ -18,7 +18,7 @@ class CheckinController {
       where: { student_id },
       offset: (page - 1) * 20,
       limit: 20,
-      order: ['created_at'],
+      order: [['created_at', 'DESC']],
       include: [
         {
           model: Student,

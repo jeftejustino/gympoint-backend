@@ -11,11 +11,11 @@ class RegistrationMail {
     const { registration } = data;
 
     await Mail.sendMail({
-      to: `${registration.student.nome} <${registration.student.email}`,
+      to: `${registration.student.name} <${registration.student.email}`,
       subject: 'Matricula Realizada',
       template: 'registration',
       context: {
-        student: registration.student.nome,
+        student: registration.student.name,
         plan: registration.plan.title,
         price: registration.price,
         start_date: format(

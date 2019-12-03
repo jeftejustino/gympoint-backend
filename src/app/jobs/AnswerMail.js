@@ -11,11 +11,11 @@ class AnswerMail {
     const { helpOrder } = data;
 
     await Mail.sendMail({
-      to: `${helpOrder.student.nome} <${helpOrder.student.email}`,
+      to: `${helpOrder.student.name} <${helpOrder.student.email}`,
       subject: 'Pedido de auxílio respondido!',
       template: 'answer',
       context: {
-        student: helpOrder.student.nome,
+        student: helpOrder.student.name,
         question: helpOrder.question,
         answer: helpOrder.answer,
         answer_at: format(
