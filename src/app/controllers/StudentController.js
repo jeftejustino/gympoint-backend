@@ -12,14 +12,16 @@ class StudentController {
     };
     if (id) where.id = id;
 
-    const students = await Student.findAll({
+    const { count, rows } = await Student.findAndCountAll({
       offset: (page - 1) * 20,
       limit: 20,
       order: ['created_at'],
       attributes: ['id', 'name', 'email', 'age', 'weight', 'height'],
       where,
     });
-    return res.json(students);
+
+    res.append('Count', count);
+    return res.json(rows);
   }
 
   async store(req, res) {

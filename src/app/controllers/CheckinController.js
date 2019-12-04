@@ -14,10 +14,10 @@ class CheckinController {
       return res.status(401).json({ error: 'Student not found' });
     }
 
-    const checkins = await Checkin.findAll({
+    const { rows, count } = await Checkin.findAndCountAll({
       where: { student_id },
-      offset: (page - 1) * 20,
-      limit: 20,
+      offset: (page - 1) * 10,
+      limit: 10,
       order: [['created_at', 'DESC']],
       include: [
         {
@@ -28,7 +28,8 @@ class CheckinController {
       ],
     });
 
-    return res.json(checkins);
+    res.append('Count', count);
+    return res.json(rows);
   }
 
   async store(req, res) {

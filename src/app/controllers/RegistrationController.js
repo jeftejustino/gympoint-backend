@@ -14,7 +14,7 @@ class RegistrationController {
     const where = {};
     if (id) where.id = id;
 
-    const registration = await Registration.findAll({
+    const { count, rows } = await Registration.findAndCountAll({
       offset: (page - 1) * 20,
       limit: 20,
       order: ['created_at'],
@@ -33,7 +33,9 @@ class RegistrationController {
         },
       ],
     });
-    return res.json(registration);
+
+    res.append('Count', count);
+    return res.json(rows);
   }
 
   async store(req, res) {

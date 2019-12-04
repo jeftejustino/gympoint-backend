@@ -13,10 +13,10 @@ class HelpOrderController {
       return res.status(401).json({ error: 'Student not found' });
     }
 
-    const helpOrder = await HelpOrder.findAll({
+    const { rows, count } = await HelpOrder.findAndCountAll({
       where: { student_id },
-      offset: (page - 1) * 20,
-      limit: 20,
+      offset: (page - 1) * 10,
+      limit: 10,
       order: [['updatedAt', 'DESC']],
       include: [
         {
@@ -27,7 +27,8 @@ class HelpOrderController {
       ],
     });
 
-    return res.json(helpOrder);
+    res.append('Count', count);
+    return res.json(rows);
   }
 
   async store(req, res) {

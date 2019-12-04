@@ -10,13 +10,15 @@ class PlanController {
       title: { [Sequelize.Op.substring]: q },
     };
     if (id) where.id = id;
-    const plan = await Plan.findAll({
+    const { rows, count } = await Plan.findAndCountAll({
       offset: (page - 1) * 20,
       limit: 20,
       where,
       order: ['created_at'],
     });
-    return res.json(plan);
+
+    res.append('Count', count);
+    return res.json(rows);
   }
 
   async store(req, res) {
