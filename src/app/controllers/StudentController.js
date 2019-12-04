@@ -5,15 +5,19 @@ import Student from '../models/Student';
 
 class StudentController {
   async index(req, res) {
-    const { page = 1, q = '' } = req.query;
+    const { page = 1, q = '', id = 0 } = req.query;
+
+    const where = {
+      name: { [Sequelize.Op.substring]: q },
+    };
+    if (id) where.id = id;
+
     const students = await Student.findAll({
       offset: (page - 1) * 20,
       limit: 20,
       order: ['created_at'],
       attributes: ['id', 'name', 'email', 'age', 'weight', 'height'],
-      where: {
-        name: { [Sequelize.Op.substring]: q },
-      },
+      where,
     });
     return res.json(students);
   }

@@ -9,12 +9,17 @@ import Queue from '../../lib/Queue';
 
 class RegistrationController {
   async index(req, res) {
-    const { page = 1 } = req.query;
+    const { page = 1, id = 0 } = req.query;
+
+    const where = {};
+    if (id) where.id = id;
+
     const registration = await Registration.findAll({
       offset: (page - 1) * 20,
       limit: 20,
       order: ['created_at'],
       attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
+      where,
       include: [
         {
           model: Student,

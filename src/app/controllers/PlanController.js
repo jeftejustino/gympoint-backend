@@ -1,12 +1,19 @@
 import * as Yup from 'yup';
+import Sequelize from 'sequelize';
 import Plan from '../models/Plan';
 
 class PlanController {
   async index(req, res) {
-    const { page = 1 } = req.query;
+    const { page = 1, q = '', id = 0 } = req.query;
+
+    const where = {
+      title: { [Sequelize.Op.substring]: q },
+    };
+    if (id) where.id = id;
     const plan = await Plan.findAll({
       offset: (page - 1) * 20,
       limit: 20,
+      where,
       order: ['created_at'],
     });
     return res.json(plan);
