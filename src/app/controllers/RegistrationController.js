@@ -17,7 +17,7 @@ class RegistrationController {
     const { count, rows } = await Registration.findAndCountAll({
       offset: (page - 1) * 20,
       limit: 20,
-      order: ['created_at'],
+      order: [['created_at', 'DESC']],
       attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
       where,
       include: [

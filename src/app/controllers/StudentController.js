@@ -15,7 +15,7 @@ class StudentController {
     const { count, rows } = await Student.findAndCountAll({
       offset: (page - 1) * 20,
       limit: 20,
-      order: ['created_at'],
+      order: [['created_at', 'DESC']],
       attributes: ['id', 'name', 'email', 'age', 'weight', 'height'],
       where,
     });

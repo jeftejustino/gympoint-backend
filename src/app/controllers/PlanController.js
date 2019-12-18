@@ -14,7 +14,7 @@ class PlanController {
       offset: (page - 1) * 20,
       limit: 20,
       where,
-      order: ['created_at'],
+      order: [['created_at', 'DESC']],
     });
 
     res.append('Count', count);
