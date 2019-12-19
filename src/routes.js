@@ -12,6 +12,12 @@ import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 
+// routes.use((req, res, next) => {
+//   setTimeout(() => {
+//     next();
+//   }, 2000);
+// });
+
 routes.get('/students/:id/checkin', CheckinController.index);
 routes.post('/students/:id/checkin', CheckinController.store);
 routes.get('/students/:id/help-orders', HelpOrderStudentController.index);
