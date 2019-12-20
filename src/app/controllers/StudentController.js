@@ -31,8 +31,12 @@ class StudentController {
         .email()
         .required(),
       age: Yup.number().required(),
-      weight: Yup.string().required(),
-      height: Yup.string().required(),
+      weight: Yup.number()
+        .round()
+        .required(),
+      height: Yup.number()
+        .round()
+        .required(),
     });
 
     if (!(await Schema.isValid(req.body))) {
@@ -66,8 +70,12 @@ class StudentController {
         .email()
         .required(),
       age: Yup.number().required(),
-      weight: Yup.string().required(),
-      height: Yup.string().required(),
+      weight: Yup.number()
+        .round()
+        .required(),
+      height: Yup.number()
+        .round()
+        .required(),
     });
 
     if (!(await Schema.isValid(req.body))) {

@@ -15,7 +15,11 @@ class App {
 
     Sentry.init(sentryConfig);
 
-    this.server.use(cors()); /* { origin: 'https://sitedaapi.com.br'} */
+    this.server.use(
+      cors({
+        exposedHeaders: 'Count',
+      })
+    ); /* { origin: 'https://sitedaapi.com.br'} */
     this.middlewares();
     this.routes();
     this.exceptionHandler();
